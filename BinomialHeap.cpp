@@ -130,22 +130,24 @@ bool BinomialHeap::DecreaseKey(int key, int new_key) {
   }
 
   node->key_ = new_key;
-  BinomTreeNodePtr parent(node->parent_);
+  BinomTreeNodePtr parent(node->parent_.lock());
+  // sifting up while node has parent and parent's key less than new key
   while (parent && parent->key_ > node->key_) {
     std::swap(parent->key_, node->key_);
     node = parent;
-    if (parent->parent_.lock()) {
-      parent = BinomTreeNodePtr(parent->parent_);
-    } else {
-      break;
-    }
+    parent = parent->parent_.lock();
   }
   return true;
 }
 
-void BinomialHeap::Merge(IPriorityQueuePtr other) {
-  Union(std::dynamic_pointer_cast<BinomialHeap>(other));
+bool BinomialHeap::Merge(IPriorityQueuePtr other) {
+  BinomialHeapPtr casted_other(std::dynamic_pointer_cast<BinomialHeap>(other));
+  if (!casted_other) {
+    return false;
+  }
+  Union(casted_other);
   Heapify();
+  return true;
 }
 
 int BinomialHeap::Size() const {

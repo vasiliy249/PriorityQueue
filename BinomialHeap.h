@@ -40,7 +40,7 @@ public:
 
   virtual bool DecreaseKey(int key, int new_key);
 
-  virtual void Merge(IPriorityQueuePtr other);
+  virtual bool Merge(IPriorityQueuePtr other);
 
   virtual int  Size() const;
 

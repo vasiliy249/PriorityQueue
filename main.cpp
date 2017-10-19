@@ -14,9 +14,9 @@ int main() {
   prio_queue->Insert(8);
   std::cout << prio_queue->ToString();
 
-  //int min;
-  //prio_queue->ExtractMin(min);
-  //std::cout << prio_queue->ToString();
+  int min;
+  prio_queue->ExtractMin(min);
+  std::cout << prio_queue->ToString();
 
   prio_queue->Delete(3);
   std::cout << prio_queue->ToString();

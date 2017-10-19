@@ -24,7 +24,7 @@ public:
 
   virtual bool DecreaseKey(int key, int new_key) = 0;
 
-  virtual void Merge(IPriorityQueuePtr other) = 0;
+  virtual bool Merge(IPriorityQueuePtr other) = 0;
 
   virtual int  Size() const = 0;
 
